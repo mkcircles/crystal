@@ -36,12 +36,15 @@ class DistrictController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($district)
+    public function show($area)
     {
-        
-        $dis = District::find($district)->with('subcounties')->first(); 
+        $dis = District::where('district_name',$area)->first(); 
+        if(!$dis){
+            return redirect()->route('districts');
+        }
+
         //Get groups that belong to this district
-        $groups = FarmerGroup::where('district_id',$district)->paginate();
+        $groups = FarmerGroup::where('district_id',$dis->id)->paginate();
         //$district->loadCount(['groups','farmers','subcounties'])->with('subcounties')->get();
         return view('admin.district',compact('dis','groups'));
 

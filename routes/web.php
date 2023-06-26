@@ -23,6 +23,7 @@ Route::get('/data/d',[ImportDataController::class,'importDetailedData']);
 
 
 Route::get('/admin/districts',[DistrictController::class,'index'])->name('districts');
-Route::get('/admin/districts/{district}',[DistrictController::class,'show'])->name('district.show');
+Route::get('/admin/district/{area}',[DistrictController::class,'show'])->name('district.show');
 
 Route::get('/admin/groups',[FarmerGroupController::class,'index'])->name('groups');
+Route::get('/admin/group/{groupId}',[FarmerGroupController::class,'show'])->name('group.show');

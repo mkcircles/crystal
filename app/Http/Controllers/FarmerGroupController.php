@@ -35,9 +35,18 @@ class FarmerGroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FarmerGroup $farmerGroup)
+    public function show($groupId)
     {
-        //
+        $gp = FarmerGroup::find($groupId); 
+        if(!$gp){
+            return redirect()->route('groups');
+        }
+
+        //Get groups that belong to this district
+        $farmers = $gp->members()->paginate();
+        //$district->loadCount(['groups','farmers','subcounties'])->with('subcounties')->get();
+        return view('admin.farmers',compact('gp','farmers'));
+        
     }
 
     /**
